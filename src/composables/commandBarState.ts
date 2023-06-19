@@ -1,11 +1,12 @@
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useHistoryStore } from '../store/history';
+import { useCommandBarStore } from '../store/commandBar';
 
 export const useCommandBarState = () => {
-  const commandBarText = ref('');
   const commandBarFocus = ref(false);
 
   const historyStore = useHistoryStore();
+  const commandBarStore = useCommandBarStore();
 
   const onCommandBarFocus = () => {
     commandBarFocus.value = true;
@@ -16,11 +17,31 @@ export const useCommandBarState = () => {
   };
 
   const onCommandBarKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Enter' && commandBarText.value.length > 0) {
-      historyStore.addToHistory(commandBarText.value);
-      commandBarText.value = '';
+    let shouldPrevent = true;
+    if (event.key === 'Enter' && commandBarStore.typedCommand.length > 0) {
+      historyStore.addToHistory(commandBarStore.typedCommand);
+      commandBarStore.typedCommand = '';
+    } else if (event.key === 'ArrowUp') {
+      commandBarStore.selectedSuggestion--;
+    } else if (event.key === 'ArrowDown') {
+      commandBarStore.selectedSuggestion++;
+    } else if (event.key === 'Tab') {
+      if (commandBarStore.suggestions.length) {
+        commandBarStore.typedCommand =
+          commandBarStore.suggestions[commandBarStore.selectedSuggestion];
+      }
+    } else {
+      shouldPrevent = false;
     }
+    if (shouldPrevent) event.preventDefault();
   };
+
+  const commandBarText = computed({
+    get: () => commandBarStore.typedCommand,
+    set: (value) => {
+      commandBarStore.typedCommand = value;
+    }
+  });
 
   return {
     commandBarText,

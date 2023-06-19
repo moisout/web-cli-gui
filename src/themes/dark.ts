@@ -4,6 +4,7 @@ export const darkTheme = {
     secondary: '#f92c85',
     background: '#121212',
     backgroundLight: '#262626',
-    text: '#fff'
+    text: '#fff',
+    textInverted: '#000'
   }
 } as const;

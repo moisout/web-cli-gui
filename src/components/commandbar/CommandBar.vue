@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useCommandBarState } from '../composables/commandBarState';
+import { useCommandBarState } from '../../composables/commandBarState';
 const commandBarInput = ref<HTMLInputElement | null>(null);
 
 const {
@@ -15,6 +15,10 @@ const {
 <template>
   <div class="command-bar">
     <div class="command-bar-outline" :class="{ focus: commandBarFocus }" />
+    <Suggestions
+      :visible="commandBarFocus"
+      :typed-input="commandBarText"
+    />
     <input
       class="command-bar-input"
       @focus="onCommandBarFocus"

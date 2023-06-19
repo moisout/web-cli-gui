@@ -4,6 +4,7 @@ export const lightTheme = {
     secondary: '#f92c85',
     background: '#fff',
     backgroundLight: '#f2f2f2',
-    text: '#000'
+    text: '#000',
+    textInverted: '#fff'
   }
 } as const;
