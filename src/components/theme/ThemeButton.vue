@@ -23,7 +23,7 @@ const btnRef = ref<HTMLButtonElement | null>(null);
       }"
     />
   </button>
-  <ThemePopup :open="open" :btnRef="btnRef" />
+  <ThemePopup :open="open" :btnRef="btnRef" @close="() => (open = false)" />
 </template>
 
 <style lang="scss" scoped>

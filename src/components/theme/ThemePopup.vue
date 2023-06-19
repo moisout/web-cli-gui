@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { useDark, useToggle } from '@vueuse/core';
+import { useDark, useToggle, onClickOutside, onKeyStroke } from '@vueuse/core';
 import { computed, ref } from 'vue';
 
 const props = defineProps<{
   open: boolean;
   btnRef: HTMLButtonElement | null;
+}>();
+
+const emit = defineEmits<{
+  (e: 'close'): void;
 }>();
 
 const position = computed(() => {
@@ -26,6 +30,14 @@ const onThemeClick = (theme: string) => {
 };
 
 const popupRef = ref<HTMLDivElement | null>(null);
+
+onClickOutside(popupRef, () => {
+  emit('close');
+});
+
+onKeyStroke('Escape', () => {
+  emit('close');
+});
 </script>
 
 <template>
