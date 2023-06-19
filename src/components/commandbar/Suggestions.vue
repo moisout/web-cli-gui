@@ -16,6 +16,7 @@ commandBarStore.setSuggestions(namespaces);
 watch(
   () => commandBarStore.typedCommand,
   (newValue) => {
+    commandBarStore.selectedSuggestion = 0;
     commandBarStore.setSuggestions(
       namespaces.filter((namespace) => namespace.startsWith(newValue)).sort()
     );
