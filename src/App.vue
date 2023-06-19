@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import CommandBar from './components/CommandBar.vue';
-import History from './components/History.vue';
 import { useApplyThemes } from './composables/applyTheme';
 useApplyThemes();
 </script>
 
 <template>
   <div class="main">
+    <Toolbar />
     <History />
     <CommandBar />
   </div>
