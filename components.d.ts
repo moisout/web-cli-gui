@@ -7,14 +7,12 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Button: typeof import('./src/components/theme/Button.vue')['default']
     CommandBar: typeof import('./src/components/CommandBar.vue')['default']
     History: typeof import('./src/components/History.vue')['default']
     ITablerMoon: typeof import('~icons/tabler/moon')['default']
     ITablerPalette: typeof import('~icons/tabler/palette')['default']
     ITablerSun: typeof import('~icons/tabler/sun')['default']
     Palette: typeof import('./src/components/icon/Palette.vue')['default']
-    Popup: typeof import('./src/components/theme/Popup.vue')['default']
     ThemeButton: typeof import('./src/components/theme/ThemeButton.vue')['default']
     ThemePopup: typeof import('./src/components/theme/ThemePopup.vue')['default']
     Toolbar: typeof import('./src/components/Toolbar.vue')['default']
